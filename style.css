@@ -1,3 +1,20 @@
+html {
+  background-color:#1b1b1b;
+}
+
+body {
+  background-image:url("campanile_bells.jpg");
+  background-image:linear-gradient(to bottom, 
+                                   rgba(0.1, 0.1, 0.1,1.0),
+                                   rgba(1.0, 1.0, 1.0, 0.0),
+                                   rgba(27,27,27,1.0)),
+                   url("campanile_bells.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  overflow-y: hidden;
+  overflow-x: hidden
+}
+
 #menuBar {
   list-style-type: none;
   margin: 0;
@@ -37,11 +54,39 @@ p {
   font-family:Times;
   font-size:24pt;
   text-align: center;
+  color:#fafafa;
+  text-shadow:2px 2px #1b1b1b;
 }
 
 h1 {
   text-align: center;
-  font-family:Palatino;
+  font-family:Monospace;
   font-size:72pt;
+  color:#fafafa;
+  text-shadow:2px 2px #1b1b1b;
 }
 
+#getInTouch {
+  display: table;
+  text-align: center;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#getInTouch li {
+  width: 100px;
+  height: 35px;
+  float: left;
+}
+
+#icon {
+  filter:invert(1.0);
+}
+
+h2 {
+  color:#fafafa;
+  font-family:Monospace;
+  font-size:32pt;
+  text-shadow:2px 2px #1b1b1b;
+}
