@@ -22,7 +22,8 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #1b1b1b
+  background-color: #1b1b1b;
+  z-index: 1;
 }
 
 .sticky {
