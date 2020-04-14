@@ -3,24 +3,26 @@ html {
 }
 
 body {
+  color:#fafafa;
+  margin:0px;
   background-image:url("campanile_bells.jpg");
   background-image:linear-gradient(to bottom, 
-                                   rgba(0.1, 0.1, 0.1,1.0),
                                    rgba(1.0, 1.0, 1.0, 0.0),
                                    rgba(27,27,27,1.0)),
                    url("campanile_bells.jpg");
   background-repeat:no-repeat;
   background-size:cover;
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: hidden
 }
 
 #menuBar {
+  font-family:Monospace;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #262626
+  background-color: #1b1b1b
 }
 
 .sticky {
@@ -36,8 +38,8 @@ body {
 }
 
 #menuBar li a {
-  color: #a0a0a0;
-  background: #262626;
+  color: #fafafa;
+  background: #1b1b1b;
   display: block;
   height: 35px;
   padding: 5px;
@@ -47,10 +49,10 @@ body {
 
 #menuBar li a:hover {
   color:#262626;
-  background:#a0a0a0;
+  background:#fafafa;
 }
 
-p {
+#overview {
   font-family:Times;
   font-size:24pt;
   text-align: center;
@@ -84,9 +86,40 @@ h1 {
   filter:invert(1.0);
 }
 
-h2 {
+hr {
   color:#fafafa;
+}
+
+h2 {
   font-family:Monospace;
-  font-size:32pt;
+  font-size:42pt;
   text-shadow:2px 2px #1b1b1b;
+  margin:20px;
+}
+
+h3 {
+  font-family:Monospace;
+  font-size:24pt;
+  text-shadow:2px 2px #1b1b1b;
+  margin:30px;
+}
+
+p {
+  font-family:Times;
+  font-size: 14pt;
+  margin:40px;
+}
+
+a:hover {
+  color:#dadada;
+}
+
+a:visited {
+  color:#fafafa;
+}
+
+ul {
+  font-family:Times;
+  font-size:14pt;
+  margin:40px;
 }
