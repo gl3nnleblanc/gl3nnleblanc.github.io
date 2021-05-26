@@ -78,6 +78,7 @@ function init() {
   camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
   camera.position.set(10, 10, 2);
   camera.lookAt(scene.position);
+  camera.updateMatrix();
 
   document.addEventListener('pointermove', onPointerMove);
 
