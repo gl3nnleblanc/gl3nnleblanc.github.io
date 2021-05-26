@@ -104,6 +104,7 @@ function updatePoints() {
     const positions = points.geometry.attributes.position.array;
     const colors = points.geometry.attributes.color.array;
 
+    let k = 0;
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
             const u = i / width;
