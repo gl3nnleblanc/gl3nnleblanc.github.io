@@ -86,7 +86,7 @@ function init() {
 }
 
 function render() {
-    const t = clock.elapsedTime();
+    const t = clock.getElapsedTime();
     const r = Math.sin(t / (11 * Math.PI));
     const g = Math.cos(t / (3 * Math.PI));
     const b = Math.sin(t / (7 * Math.PI));
