@@ -75,7 +75,7 @@ function init() {
   renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / winder.innerHeight, 1, 10000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.set(10, 10, 10);
   camera.lookAt(scene.position);
   camera.updateMatrix();
