@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+import Stats from 'https://mrdoob.github.io/stats.js/build/stats.min.js';
 
 let renderer, scene, camera, clock;
 let pointer = new THREE.Vector2();
@@ -98,6 +99,7 @@ function render() {
 function animate() {
     requestAnimationFrame(animate);
     render();
+    stats.update();
 }
 
 init();
