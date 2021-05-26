@@ -77,7 +77,7 @@ function init() {
   scene = new THREE.Scene();
   clock = new THREE.Clock();
   stats = new Stats();
-  canvas.appendChile(stats.dom);
+  canvas.appendChild(stats.dom);
 
   renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
