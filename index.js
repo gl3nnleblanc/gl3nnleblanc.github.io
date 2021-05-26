@@ -117,7 +117,7 @@ function updatePoints() {
 
 
             const a = (x+x/2 - (pointer.x / 2)) * 20;
-            const b = (z-z/2 + (pointer.y / 2)) * 20;
+            const b = (z+z/2 + (pointer.y / 2)) * 20;
 
 
             const y = (Math.exp(-a*a - b*b)) *
