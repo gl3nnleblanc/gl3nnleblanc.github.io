@@ -6,6 +6,8 @@ let pointer = new THREE.Vector2();
 let width = 80;
 let height = 100;
 
+const pointSize = 0.05;
+
 
 function generatePointCloudGeometry( color, width, length ) {
     const geometry = new THREE.BufferGeometry();
