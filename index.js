@@ -7,6 +7,10 @@ let pointer = new THREE.Vector2();
 
 let t;
 
+let r = 0;
+let g = 0;
+let b = 0;
+
 let points;
 
 
@@ -89,6 +93,7 @@ function init() {
   camera.updateMatrix();
 
   document.addEventListener('pointermove', onPointerMove);
+
   points = generatePointCloud( new THREE.Color(r, g, b), width, height, t);
   points.scale.set(5, 10, 10);
   points.position.set(0, 0, 0);
@@ -127,9 +132,9 @@ function updatePoints() {
 function render() {
     camera.updateMatrixWorld();
     t = clock.getElapsedTime();
-    const r = Math.sin(t / (11 * Math.PI));
-    const g = Math.cos(t / (3 * Math.PI));
-    const b = Math.sin(t / (7 * Math.PI));
+    r = Math.sin(t / (11 * Math.PI));
+    g = Math.cos(t / (3 * Math.PI));
+    b = Math.sin(t / (7 * Math.PI));
     updatePoints();
     renderer.render(scene, camera);
 }
