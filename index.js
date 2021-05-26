@@ -1,8 +1,9 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
-let renderer, scene, camera, clock;
+let renderer, scene, camera, clock, stats;
 let pointer = new THREE.Vector2();
+
 
 let width = 80;
 let height = 100;
@@ -67,6 +68,7 @@ function init() {
 
   scene = new THREE.Scene();
   clock = new THREE.Clock();
+  stats = new Stats();
 
   renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
