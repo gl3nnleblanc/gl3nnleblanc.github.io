@@ -7,8 +7,8 @@ let pointer = new THREE.Vector2();
 let t;
 
 
-let width = window.innerWidth;
-let height = window.innerHeight;
+let width = 80;
+let height = 100;
 
 const pointSize = 0.05;
 
@@ -76,7 +76,7 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.set(0, 0, 10);
+  camera.position.set(0, 10, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
