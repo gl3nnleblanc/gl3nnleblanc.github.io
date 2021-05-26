@@ -9,8 +9,8 @@ let geometry;
 let t;
 
 
-let width = 100;
-let height = 300;
+let width = 150;
+let height = 50;
 
 const pointSize = 0.05;
 
@@ -79,7 +79,7 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.set(0, 10, 0);
+  camera.position.set(0, 5, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
