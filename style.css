@@ -11,6 +11,16 @@ body {
   overflow-x: hidden
 }
 
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
 #menuBar {
   font-family:Helvetica;
   list-style-type: none;
