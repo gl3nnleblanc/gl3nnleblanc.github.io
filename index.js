@@ -35,8 +35,8 @@ function generatePointCloudGeometry( color, width, height) {
             const x = (u - 0.5);
             const z = (v - 0.5);
 
-            const a = u - pointer.x;
-            const b = v - pointer.y;
+            const a = (u - pointer.x) * 4;
+            const b = (v - pointer.y) * 4;
 
 
             const y = 0;
