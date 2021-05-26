@@ -101,8 +101,8 @@ function init() {
 }
 
 function updatePoints() {
-    positions = points.geometry.attributes.position.array;
-    colors = points.geometry.attributes.color.array;
+    const positions = points.geometry.attributes.position.array;
+    const colors = points.geometry.attributes.color.array;
 
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
