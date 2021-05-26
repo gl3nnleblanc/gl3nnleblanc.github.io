@@ -115,8 +115,8 @@ function updatePoints() {
             const x = (u - 0.5);
             const z = (v - 0.5);
 
-            const a = (x - (pointer.x / 2)) * 15;
-            const b = (y + (pointer.y / 2)) * 15;
+            const a = x * 15;
+            const b = z * 15;
 
 
             const y = (Math.exp(-a*a - b*b)) * (Math.pow(a, 3) - 3 * a) * (Math.pow(b, 4) - 6 * Math.pow(b, 2) + 3) * Math.sin(a - t) * Math.cos(b - t) / 20;
