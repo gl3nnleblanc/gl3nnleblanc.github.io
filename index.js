@@ -1,6 +1,10 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
+let renderer, scene, camera, clock;
 let pointer = new THREE.Vector2();
+
+let width = 80;
+let height = 100;
 
 
 function generatePointCloudGeometry( color, width, length ) {
@@ -54,17 +58,17 @@ function onPointerMove(event) {
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
-function main() {
+function init() {
 
   const canvas = document.querySelector('#c');
 
-  const scene = new THREE.Scene();
-  const clock = new THREE.Clock();
+  scene = new THREE.Scene();
+  clock = new THREE.Clock();
 
-  const renderer = new THREE.WebGLRenderer({canvas});
+  renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
+  camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
   camera.position.z = 2;
 
   document.addEventListener('pointermove', onPointerMove);
@@ -73,10 +77,17 @@ function main() {
   const material = new THREE.MeshBasicMaterial({color: 0x44aa88});  // greenish blue
   const cube = new THREE.Mesh(geometry, material);
 
-  scene.add(cube);
-
-  renderer.render(scene, camera);
+  const points = generatePointCloud( new THREE.Color(1, 0, 0), width, height);
+  points.scale.set(5, 10, 10);
+  points.position.set(-5, 0, 0);
+  scene.add(points);
 
 }
 
-main();
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+
+init();
+animate();
