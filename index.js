@@ -4,6 +4,8 @@ import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 let renderer, scene, camera, clock, stats;
 let pointer = new THREE.Vector2();
 
+let t;
+
 
 let width = 80;
 let height = 100;
@@ -49,8 +51,8 @@ function generatePointCloudGeometry( color, width, length ) {
 }
 
 
-function generatePointCloud(color, width, length) {
-    const geometry = generatePointCloudGeometry(color, width, length);
+function generatePointCloud(color, width, length, t) {
+    const geometry = generatePointCloudGeometry(color, width, length, t);
     const material = new THREE.PointsMaterial({size: pointSize, vertexColors: true});
 
     return new THREE.Points(geometry, material);
@@ -74,7 +76,8 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
-  camera.position.z = 2;
+  camera.position.set(10, 10, 2);
+  camera.lookAt(scene.position);
 
   document.addEventListener('pointermove', onPointerMove);
 
@@ -86,11 +89,11 @@ function init() {
 }
 
 function render() {
-    const t = clock.getElapsedTime();
+    t = clock.getElapsedTime();
     const r = Math.sin(t / (11 * Math.PI));
     const g = Math.cos(t / (3 * Math.PI));
     const b = Math.sin(t / (7 * Math.PI));
-    const points = generatePointCloud( new THREE.Color(r, g, b), width, height);
+    const points = generatePointCloud( new THREE.Color(r, g, b), width, height, t);
     points.scale.set(5, 10, 10);
     points.position.set(-5, 0, 0);
     scene.add(points);
