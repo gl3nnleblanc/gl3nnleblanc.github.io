@@ -104,6 +104,10 @@ function updatePoints() {
     const positions = points.geometry.attributes.position.array;
     const colors = points.geometry.attributes.color.array;
 
+    const r = Math.sin(t / (11 * Math.PI));
+    const g = Math.cos(t / (3 * Math.PI));
+    const b = Math.sin(t / (7 * Math.PI));
+
     let k = 0;
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
@@ -120,9 +124,9 @@ function updatePoints() {
             positions[3 * k + 1] = y;
 
             const intensity = ( y + 0.1 ) * 5;
-            colors[3 * k] = color.r * intensity;
-            colors[3 * k + 1] = color.g * intensity;
-            colors[3 * k + 2] = color.b * intensity;
+            colors[3 * k] = r * intensity;
+            colors[3 * k + 1] = g * intensity;
+            colors[3 * k + 2] = b * intensity;
 
             k++;
         }
@@ -133,9 +137,6 @@ function updatePoints() {
 function render() {
     camera.updateMatrixWorld();
     t = clock.getElapsedTime();
-    r = Math.sin(t / (11 * Math.PI));
-    g = Math.cos(t / (3 * Math.PI));
-    b = Math.sin(t / (7 * Math.PI));
     updatePoints();
     renderer.render(scene, camera);
 }
