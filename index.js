@@ -1,5 +1,5 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
-import Stats from 'https://mrdoob.github.io/stats.js/build/stats.min.js';
+import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
 let renderer, scene, camera, clock;
 let pointer = new THREE.Vector2();
