@@ -26,8 +26,8 @@ function generatePointCloudGeometry( color, width, height) {
 
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
-            const u = i / 20;
-            const v = j / 30;;
+            const u = i;
+            const v = j;
             const x = u - 0.5;
             //const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
             const y = 0;
