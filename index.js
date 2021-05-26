@@ -7,8 +7,8 @@ let pointer = new THREE.Vector2();
 let t;
 
 
-let width = 300;
-let length = 140;
+let width = 100;
+let length = 300;
 
 const pointSize = 0.05;
 
