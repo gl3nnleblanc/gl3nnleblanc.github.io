@@ -123,7 +123,7 @@ function updatePoints() {
             const y = (Math.exp(-a*a - b*b)) *
                 (Math.pow(a, 3) - 3 * a) *
                 (Math.pow(b, 4) - 6 * Math.pow(b, 2) + 3) *
-                Math.sin(a - 1.5*t) * Math.sin(b - 1.5*t) / 32
+                Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t) / 32
             positions[3 * k + 1] = y;
 
             const intensity = Math.exp(-a*a - b*b)
