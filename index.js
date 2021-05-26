@@ -138,6 +138,8 @@ function render() {
     camera.updateMatrixWorld();
     t = clock.getElapsedTime();
     updatePoints();
+    points.geometry.attributes.position.needsUpdate = true;
+    points.geometry.attributes.color.needsUpdate = true;
     renderer.render(scene, camera);
 }
 
