@@ -81,8 +81,8 @@ function init() {
   const near = 8;
   const far = 12;
   const factor = 4.5;
-  camera = new THREE.OrthographicCamera(-window.innerWidth / factor, window.innerWidth / factor, window.innerHeight / factor, -window.innerHeight / factor, 8, 12);
-  camera.position.set(0, 4, 0);
+  camera = new THREE.OrthographicCamera(-window.innerWidth / factor, window.innerWidth / factor, window.innerHeight / factor, -window.innerHeight / factor, 4, -4);
+  camera.position.set(0, 8, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
