@@ -7,8 +7,8 @@ let pointer = new THREE.Vector2();
 let t;
 
 
-let width = 80;
-let height = 100;
+let width = 300;
+let height = 140;
 
 const pointSize = 0.05;
 
@@ -27,7 +27,8 @@ function generatePointCloudGeometry( color, width, length ) {
             const u = i / width;
             const v = j / length;
             const x = u - 0.5;
-            const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
+            //const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
+            const y = 0;
             const z = v - 0.5;
 
             positions[3 * k] = x;
