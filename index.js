@@ -95,7 +95,7 @@ function render() {
     const b = Math.sin(t / (7 * Math.PI));
     const points = generatePointCloud( new THREE.Color(r, g, b), width, height, t);
     points.scale.set(5, 10, 10);
-    points.position.set(-5, 0, 0);
+    points.position.set(0, 0, 0);
     scene.add(points);
 
     renderer.render(scene, camera);
