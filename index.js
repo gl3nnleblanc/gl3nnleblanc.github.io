@@ -80,8 +80,8 @@ function init() {
 
   const near = 8;
   const far = 12;
-  camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
-  camera.position.set(0, 10, 0);
+  camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
+  camera.position.set(10, 10, 2);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
