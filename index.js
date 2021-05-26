@@ -14,8 +14,8 @@ let b = 0;
 let points;
 
 
-let width = 150;
-let height = 150;
+let width = 250;
+let height = 250;
 
 const pointSize = 0.02;
 
@@ -115,9 +115,9 @@ function updatePoints() {
             const x = (u - 0.5);
             const z = (v - 0.5);
 
-           
-            const a = (x+x/2 - (pointer.x / 2)) * 15;
-            const b = (z-z/2 + (pointer.y / 2)) * 15;
+
+            const a = (x+x/2 - (pointer.x / 2)) * 20;
+            const b = (z-z/2 + (pointer.y / 2)) * 20;
 
 
             const y = (Math.exp(-a*a - b*b)) * (Math.pow(a, 3) - 3 * a) * (Math.pow(b, 4) - 6 * Math.pow(b, 2) + 3) * Math.sin(a - t) * Math.cos(b - t) / 20;
