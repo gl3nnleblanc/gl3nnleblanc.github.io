@@ -79,16 +79,25 @@ function init() {
   const material = new THREE.MeshBasicMaterial({color: 0x44aa88});  // greenish blue
   const cube = new THREE.Mesh(geometry, material);
 
-  const points = generatePointCloud( new THREE.Color(1, 0, 0), width, height);
-  points.scale.set(5, 10, 10);
-  points.position.set(-5, 0, 0);
-  scene.add(points);
 
+}
+
+function render() {
+    const t = clock.getDelta();
+    const r = Math.sin(t / (11 * Math.PI));
+    const g = Math.cos(t / (3 * Math.PI));
+    const b = Math.sin(t / (7 * Math.PI));
+    const points = generatePointCloud( new THREE.Color(r, g, b), width, height);
+    points.scale.set(5, 10, 10);
+    points.position.set(-5, 0, 0);
+    scene.add(points);
+
+    renderer.render(scene, camera);
 }
 
 function animate() {
     requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+    render();
 }
 
 init();
