@@ -78,10 +78,8 @@ function init() {
   renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const near = 8;
-  const far = 12;
   camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
-  camera.position.set(10, 10, 2);
+  camera.position.set(0, 10, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
