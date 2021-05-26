@@ -4,6 +4,8 @@ import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 let renderer, scene, camera, clock, stats;
 let pointer = new THREE.Vector2();
 
+let geometry;
+
 let t;
 
 
@@ -53,7 +55,7 @@ function generatePointCloudGeometry( color, width, height) {
 
 
 function generatePointCloud(color, width, height, t) {
-    const geometry = generatePointCloudGeometry(color, width, height, t);
+    geometry = generatePointCloudGeometry(color, width, height, t);
     const material = new THREE.PointsMaterial({size: pointSize, vertexColors: true});
 
     return new THREE.Points(geometry, material);
