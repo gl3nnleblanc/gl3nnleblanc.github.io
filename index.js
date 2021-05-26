@@ -62,7 +62,7 @@ function main() {
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  const camera = new THREE.PerspectiveCamera(75, 2, 0.1, 5);
   camera.position.z = 2;
 
   document.addEventListener('pointermove', onPointerMove);
