@@ -1,5 +1,7 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
+let pointer = new THREE.Vector2();
+
 
 function generatePointCloudGeometry( color, width, length ) {
     const geometry = new THREE.BufferGeometry();
