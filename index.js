@@ -8,7 +8,7 @@ let t;
 
 
 let width = 300;
-let height = 140;
+let length = 140;
 
 const pointSize = 0.05;
 
