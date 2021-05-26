@@ -65,8 +65,8 @@ function onPointerMove(event) {
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
-function init() {
 
+function init() {
   const canvas = document.querySelector('#c');
 
   scene = new THREE.Scene();
@@ -76,19 +76,18 @@ function init() {
   renderer = new THREE.WebGLRenderer({canvas});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+  const near = 8;
+  const far = 12;
+  const cWidth = 1920;
+  const cHeight = 1080;
+  camera = new THREE.OrthographicCamera( cWidth / - 2, cWidth / 2, cHeight / 2, cHeight / - 2, near, far )
   camera.position.set(0, 10, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
   document.addEventListener('pointermove', onPointerMove);
-
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({color: 0x44aa88});  // greenish blue
-  const cube = new THREE.Mesh(geometry, material);
-
-
 }
+
 
 function render() {
     t = clock.getElapsedTime();
@@ -103,11 +102,13 @@ function render() {
     renderer.render(scene, camera);
 }
 
+
 function animate() {
     requestAnimationFrame(animate);
     render();
     stats.update();
 }
+
 
 init();
 animate();
