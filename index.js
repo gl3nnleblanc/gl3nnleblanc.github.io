@@ -21,7 +21,7 @@ function generatePointCloudGeometry( color, width, length ) {
             const u = i / width;
             const v = j / length;
             const x = u - 0.5;
-            const y = (Math.cos(u * Math.PI * 4) + Math.Sin( v * Math.PI * 8)) / 20;
+            const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
             const z = v - 0.5;
 
             positions[3 * k] = x;
