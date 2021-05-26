@@ -12,7 +12,7 @@ function main() {
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.z = 2;
 
-  const scene = new TREE.Scene();
+  const scene = new THREE.Scene();
 
   const geometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshBasicMaterial({color: 0x44aa88});  // greenish blue
