@@ -28,10 +28,10 @@ function generatePointCloudGeometry( color, width, height) {
         for (let j = 0; j < height; j++) {
             const u = i / width;
             const v = j / height;
-            const x = (u - 0.5) / 4;
+            const x = (u - 0.5);
             //const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
             const y = 0;
-            const z = (v - 0.5) / 3;;
+            const z = (v - 0.5);
 
             positions[3 * k] = x;
             positions[3 * k + 1] = y;
@@ -80,8 +80,7 @@ function init() {
 
   const near = 8;
   const far = 12;
-  const factor = 4.5;
-  camera = new THREE.OrthographicCamera(-window.innerWidth / factor, window.innerWidth / factor, window.innerHeight / factor, -window.innerHeight / factor, 1, 1000);
+  camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
   camera.position.set(0, 10, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
