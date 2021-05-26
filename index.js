@@ -80,7 +80,7 @@ function init() {
   const far = 12;
   const cWidth = 1920;
   const cHeight = 1080;
-  camera = new THREE.OrthographicCamera( cWidth / - 2, cWidth / 2, cHeight / 2, cHeight / - 2, near, far )
+  camera = new THREE.OrthographicCamera(-window.innerWidth / factor, window.innerWidth / factor, window.innerHeight / factor, -window.innerHeight / factor, 1, 1000);
   camera.position.set(0, 10, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
