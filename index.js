@@ -8,14 +8,14 @@ let t;
 
 
 let width = 100;
-let length = 300;
+let height = 300;
 
 const pointSize = 0.05;
 
 
-function generatePointCloudGeometry( color, width, length ) {
+function generatePointCloudGeometry( color, width, height) {
     const geometry = new THREE.BufferGeometry();
-    const numPoints = width * length;
+    const numPoints = width * height;
 
     const positions = new Float32Array( numPoints * 3 );
     const colors = new Float32Array( numPoints * 3 );
@@ -25,7 +25,7 @@ function generatePointCloudGeometry( color, width, length ) {
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
             const u = i / width;
-            const v = j / length;
+            const v = j / height;
             const x = u - 0.5;
             //const y = (Math.cos(u * Math.PI * 4) + Math.sin( v * Math.PI * 8)) / 20;
             const y = 0;
@@ -52,8 +52,8 @@ function generatePointCloudGeometry( color, width, length ) {
 }
 
 
-function generatePointCloud(color, width, length, t) {
-    const geometry = generatePointCloudGeometry(color, width, length, t);
+function generatePointCloud(color, width, height, t) {
+    const geometry = generatePointCloudGeometry(color, width, height, t);
     const material = new THREE.PointsMaterial({size: pointSize, vertexColors: true});
 
     return new THREE.Points(geometry, material);
