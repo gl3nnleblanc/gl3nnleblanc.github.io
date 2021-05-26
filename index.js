@@ -103,9 +103,9 @@ function updatePoints() {
     const positions = points.geometry.attributes.position.array;
     const colors = points.geometry.attributes.color.array;
 
-    const r = Math.sin(2 * Math.PI * t / 7);
-    const g = Math.sin(2 * Math.PI * (t + 3) / 7);
-    const b = Math.sin(2 * Math.PI * (t + 5) / 7);
+    const r = Math.sin(2 * Math.PI * t / 7) / 2 + 1/2;
+    const g = Math.sin(2 * Math.PI * (t + 3) / 7) / 2 + 1/2;
+    const b = Math.sin(2 * Math.PI * (t + 5) / 7) / 2 + 1/2;
 
     let k = 0;
     for (let i = 0; i < width; i++) {
@@ -126,7 +126,7 @@ function updatePoints() {
                 Math.sin(a - 1.5*t) * Math.sin(b - 1.5*t) / 32
             positions[3 * k + 1] = y;
 
-            const intensity = Math.tanh(y * y);
+            const intensity = Math.exp(-a*a - b*b)
             colors[3 * k] = r * intensity;
             colors[3 * k + 1] = g * intensity;
             colors[3 * k + 2] = b * intensity;
