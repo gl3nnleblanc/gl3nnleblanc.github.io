@@ -4,6 +4,7 @@ import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 let renderer, scene, camera, raycaster, clock, stats;
 let pointer = new THREE.Vector2();
 let pointerVel = new THREE.Vector2();
+let pointerVelocitySpread;
 
 
 let t;
@@ -107,6 +108,7 @@ function init() {
   scene.add(points);
     
   raycaster = new THREE.Raycaster();
+  pointerVelocitySpread = 0;
 }
 
 function updatePoints() {
@@ -135,8 +137,10 @@ function updatePoints() {
                 * Math.sin(a - t) * Math.sin(b - t) / 4800
             positions[3 * k + 1] = yt;
             
-            const pointerVelocitySpread = Math.max(0.2, 
-                                                   (pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y) * 20);
+            pointerVelocitySpread = Math.max(
+                0.2, 
+                (pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y) * 20
+            ) * 0.5 + pointerVelocitySpread * 0.5;
 
             const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b) / pointerVelocitySpread))) * 20
             colors[3 * k] = r * intensity;
