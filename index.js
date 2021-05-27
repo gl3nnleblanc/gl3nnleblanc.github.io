@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
-let renderer, scene, camera, clock, stats;
+let renderer, scene, camera, raycaster, clock, stats;
 let pointer = new THREE.Vector2();
 
 
@@ -97,6 +97,8 @@ function init() {
   points.scale.set(5, 10, 10);
   points.position.set(0, 0, 0);
   scene.add(points);
+    
+  raycaster = new THREE.Raycaster();
 }
 
 function updatePoints() {
@@ -139,6 +141,9 @@ function updatePoints() {
 
 function render() {
     camera.updateMatrixWorld();
+    
+    raycaster.setFromCamera(pointer, camera);
+    
     t = clock.getElapsedTime();
     updatePoints();
     points.geometry.attributes.position.needsUpdate = true;
