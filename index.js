@@ -16,6 +16,7 @@ let points;
 
 let width = 350;
 let height = 350;
+let projX, projZ;
 
 const pointSize = 0.02;
 
@@ -118,8 +119,8 @@ function updatePoints() {
             const z = (v - 0.5);
 
 
-            const a = (x+x/2 - (pointer.x / 2)) * 20;
-            const b = (z+z/2 + (pointer.y / 2)) * 20;
+            const a = (x+x/2 - (projX / 2)) * 20;
+            const b = (z+z/2 + (projZ / 2)) * 20;
 
 
             const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15)) *
@@ -143,6 +144,12 @@ function render() {
     camera.updateMatrixWorld();
     
     raycaster.setFromCamera(pointer, camera);
+    const intersections = raycaster.intersectObject(points);
+    if (intersections.length > 0) {
+     const intersection = intersections[0];
+     projX = intersection.point.x;
+     projZ = intersection.point.z;
+    }
     
     t = clock.getElapsedTime();
     updatePoints();
