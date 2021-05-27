@@ -135,8 +135,8 @@ function updatePoints() {
                 * Math.sin(a - t) * Math.sin(b - t) / 4800
             positions[3 * k + 1] = yt;
             
-            const pointerVelocitySpread = Math.max(0.5, 
-                                                   (pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y) * 10);
+            const pointerVelocitySpread = Math.max(0.2, 
+                                                   (pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y) * 20);
 
             const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b) / pointerVelocitySpread))) * 20
             colors[3 * k] = r * intensity;
