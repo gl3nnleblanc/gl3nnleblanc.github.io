@@ -14,8 +14,8 @@ let b = 0;
 let points;
 
 
-let width = 250;
-let height = 250;
+let width = 350;
+let height = 350;
 
 const pointSize = 0.02;
 
