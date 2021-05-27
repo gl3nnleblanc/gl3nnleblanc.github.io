@@ -3,6 +3,7 @@ import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
 let renderer, scene, camera, raycaster, clock, stats;
 let pointer = new THREE.Vector2();
+let pointerVel = new THREE.Vector2();
 
 
 let t;
@@ -71,8 +72,14 @@ function generatePointCloud(color, width, height, t) {
 
 
 function onPointerMove(event) {
+    const swpX = pointer.x;
+    const swpY = pointer.y;
+    
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+    pointerVel.x = swpX - pointer.x;
+    pointerVel.y = swpY - pointer.y;
 }
 
 
@@ -127,8 +134,10 @@ function updatePoints() {
             const yt = y * Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t)
                 * Math.sin(a - t) * Math.sin(b - t) / 4800
             positions[3 * k + 1] = yt;
+            
+            const pointerVelocitySpread = Math.max(0.001, pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y);
 
-            const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b)))) * 20
+            const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b / pointerVelocitySpread))) * 20
             colors[3 * k] = r * intensity;
             colors[3 * k + 1] = g * intensity;
             colors[3 * k + 2] = b * intensity;
