@@ -120,8 +120,8 @@ function updatePoints() {
             const b = (z+z/2 + (pointer.y / 2)) * 20;
 
 
-            const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15) *
-                (Math.exp(-b*b / 2) * (Math.pow(b, 6) - 15 * Math.pow(b, 4) + 45 * Math.pow(b, 2) - 15) *
+            const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15)) *
+                (Math.exp(-b*b / 2) * (Math.pow(b, 6) - 15 * Math.pow(b, 4) + 45 * Math.pow(b, 2) - 15)) *
                 Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t) / 300
             positions[3 * k + 1] = y;
 
