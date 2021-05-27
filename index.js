@@ -122,10 +122,10 @@ function updatePoints() {
 
             const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15)) *
                 (Math.exp(-b*b / 2) * (Math.pow(b, 6) - 15 * Math.pow(b, 4) + 45 * Math.pow(b, 2) - 15)) *
-                Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t) / 900
+                Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t) / 1200
             positions[3 * k + 1] = y;
 
-            const intensity = Math.min(1, y)
+            const intensity = Math.min(1/20, y) * 20
             colors[3 * k] = r * intensity;
             colors[3 * k + 1] = g * intensity;
             colors[3 * k + 2] = b * intensity;
