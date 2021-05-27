@@ -119,11 +119,8 @@ function updatePoints() {
             const z = (v - 0.5);
 
 
-            //const a = (x+x/2 - (projX / 2)) * 20;
-            //const b = (z+z/2 + (projZ / 2)) * 20;
-            const a = projX * 20;
-            const b = projZ * 20;
-
+            const a = (x+x/2 - (projX / 2)) * 20;
+            const b = (z+z/2 - (projZ / 2)) * 20;
 
             const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15)) *
                 (Math.exp(-b*b / 2) * (Math.pow(b, 6) - 15 * Math.pow(b, 4) + 45 * Math.pow(b, 2) - 15))
