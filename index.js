@@ -142,7 +142,7 @@ function updatePoints() {
                 (pointerVel.x * pointerVel.x + pointerVel.y * pointerVel.y) * 20
             );
 
-            const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b) / pointerVelocitySpread))) * pointerVelocitySpread * 20;
+            const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b) / pointerVelocitySpread))) * Math.tanh(pointerVelocitySpread) * 20;
             colors[3 * k] = r * intensity;
             colors[3 * k + 1] = g * intensity;
             colors[3 * k + 2] = b * intensity;
