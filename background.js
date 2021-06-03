@@ -1,25 +1,41 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
+// Global helper classes from three.js
 let renderer, scene, camera, raycaster, clock, stats;
+// Global mouse pointer
 let pointer = new THREE.Vector2();
 
+// Global timestamp
 let t;
 
+// Global colors
 let r = 0;
 let g = 0;
 let b = 0;
 
+// Global pointcloud
 let points;
 
-
+// Global dimensions
 let width = 350;
 let height = 350;
+
+// Projecting mouse coordinates onto 3D plane
 let projX, projZ;
+
+// Hermite polynomial of order six for wavefunction-y aesthetic
+let He_6 = (
+    x => Math.pow(x, 6) +
+        -15 * Math.pow(x, 4) +
+        45 * Math.pow(x, 2) +
+        -15
+)
 
 const pointSize = 0.02;
 
 
+// Generates geometry of initial point cloud
 function generatePointCloudGeometry( color, width, height) {
     const geometry = new THREE.BufferGeometry();
     const numPoints = width * height;
@@ -61,6 +77,7 @@ function generatePointCloudGeometry( color, width, height) {
 }
 
 
+// Generates point cloud at a given time T
 function generatePointCloud(color, width, height, t) {
     const geometry = generatePointCloudGeometry(color, width, height, t);
     const material = new THREE.PointsMaterial({size: pointSize, vertexColors: true});
@@ -69,12 +86,14 @@ function generatePointCloud(color, width, height, t) {
 }
 
 
+// Checks for mouse movement
 function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 
+// Initialize helper classes
 function init() {
   const canvas = document.querySelector('#c');
 
@@ -97,10 +116,12 @@ function init() {
   points.scale.set(5, 10, 10);
   points.position.set(0, 0, 0);
   scene.add(points);
-    
+
   raycaster = new THREE.Raycaster();
 }
 
+
+// Updates points
 function updatePoints() {
     const positions = points.geometry.attributes.position.array;
     const colors = points.geometry.attributes.color.array;
@@ -108,6 +129,7 @@ function updatePoints() {
     const r = Math.sin(2 * Math.PI * t / 7) / 2 + 1/2;
     const g = Math.sin(2 * Math.PI * (t + 3) / 7) / 2 + 1/2;
     const b = Math.sin(2 * Math.PI * (t + 5) / 7) / 2 + 1/2;
+
 
     let k = 0;
     for (let i = 0; i < width; i++) {
@@ -121,13 +143,21 @@ function updatePoints() {
             const a = (x+x/2 - (projX / 2)) * 20;
             const b = (z+z/2 - (projZ / 2)) * 20;
 
-            const y = (Math.exp(-a*a / 2) * (Math.pow(a, 6) - 15 * Math.pow(a, 4) + 45 * Math.pow(a, 2) - 15)) *
-                (Math.exp(-b*b / 2) * (Math.pow(b, 6) - 15 * Math.pow(b, 4) + 45 * Math.pow(b, 2) - 15))
+            const y = (
+                Math.exp(-(a * a + b * b) / 2) * He_6(a) * He_6(b)
             const yt = y * Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t)
                 * Math.sin(a - t) * Math.sin(b - t) / 4800
             positions[3 * k + 1] = yt;
 
-            const intensity = Math.min(1/20, Math.abs(y*Math.exp((-a*a + -b*b) / 0.2))) * 7.5 * Math.pow(x*5, 2);
+            const intensity = Math.min(
+                1/20,
+                Math.abs(
+                    y * Math.exp(
+                        (-a*a + -b*b) / 0.2
+                    )
+                )
+            ) * 7.5 * Math.pow(x*5, 2);
+
             colors[3 * k] = r * intensity;
             colors[3 * k + 1] = g * intensity;
             colors[3 * k + 2] = b * intensity;
@@ -140,7 +170,7 @@ function updatePoints() {
 
 function render() {
     camera.updateMatrixWorld();
-    
+
     raycaster.setFromCamera(pointer, camera);
     const intersections = raycaster.intersectObject(points);
     if (intersections.length > 0) {
@@ -148,7 +178,7 @@ function render() {
      projX = intersection.point.x;
      projZ = intersection.point.z;
     }
-    
+
     t = clock.getElapsedTime();
     updatePoints();
     points.geometry.attributes.position.needsUpdate = true;
