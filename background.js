@@ -145,7 +145,7 @@ function updatePoints() {
 
             const y = Math.exp(-(a * a + b * b) / 2) * He_6(a) * He_6(b)
             const yt = y * Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t)
-                * Math.sin(a - t) * Math.sin(b + 2 - t) / 4800
+                * Math.sin(a - 13*t) * Math.sin(b - 7*t) / 4800
             positions[3 * k + 1] = yt;
 
             const intensity = Math.min(
