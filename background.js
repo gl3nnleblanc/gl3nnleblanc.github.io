@@ -143,8 +143,7 @@ function updatePoints() {
             const a = (x+x/2 - (projX / 2)) * 20;
             const b = (z+z/2 - (projZ / 2)) * 20;
 
-            const y = (
-                Math.exp(-(a * a + b * b) / 2) * He_6(a) * He_6(b)
+            const y = Math.exp(-(a * a + b * b) / 2) * He_6(a) * He_6(b)
             const yt = y * Math.sin(x - 1.5*t) * Math.sin(z - 1.5*t)
                 * Math.sin(a - t) * Math.sin(b - t) / 4800
             positions[3 * k + 1] = yt;
