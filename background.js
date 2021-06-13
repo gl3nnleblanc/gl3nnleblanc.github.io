@@ -160,7 +160,7 @@ function updatePoints() {
       ) * 7.5 * ((x * 5) ** 2);
 
       const redOffset = loc
-        * hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(alpha + Math.sin(alpha))
         * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
 
@@ -174,7 +174,7 @@ function updatePoints() {
         * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
 
-      const colorDamping = 20;
+      const colorDamping = 10;
 
       colors[3 * k] = Math.sin(red * fadeoff * redOffset * (1 / colorDamping));
       colors[3 * k + 1] = Math.sin(grn * fadeoff * grnOffset * (1 / colorDamping));
