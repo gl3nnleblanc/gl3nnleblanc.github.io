@@ -169,7 +169,7 @@ function updatePoints() {
         * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1)
 
-      const blueOffset = loc
+      const bluOffset = loc
         * hermitePolyOrderFive(alpha)
         * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
