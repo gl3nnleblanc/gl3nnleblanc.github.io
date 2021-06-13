@@ -160,8 +160,8 @@ function updatePoints() {
       ) * 7.5 * ((x * 5) ** 2);
 
       const redOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha))
-        * hermitePolyOrderFive(beta)
+        * hermitePolyOrderFive(alpha + Math.sin(alpha + t))
+        * hermitePolyOrderFive(beta + Math.sin(beta + t))
         * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
 
       const grnOffset = loc
