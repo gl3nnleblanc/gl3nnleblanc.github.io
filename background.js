@@ -161,17 +161,17 @@ function updatePoints() {
 
       const redOffset = loc
         * hermitePolyOrderFive(alpha)
-        * hermitePolyOrderFive(beta);
+        * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
 
       const grnOffset = loc
         * hermitePolyOrderFive(alpha)
-        * hermitePolyOrderFive(beta);
+        * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1)
 
       const blueOffset = loc
         * hermitePolyOrderFive(alpha)
-        * hermitePolyOrderFive(beta);
+        * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
 
       colors[3 * k] = red * fadeoff * redOffset;
