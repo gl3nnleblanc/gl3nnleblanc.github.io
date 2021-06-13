@@ -154,7 +154,7 @@ function updatePoints() {
       ) * 7.5 * ((x * 5) ** 2);
 
       const offset = (x) => (
-        Math.tanh(x + 1);
+        Math.tanh(x + 1)
       );
 
       colors[3 * k] = red * intensity * offset(yt);
