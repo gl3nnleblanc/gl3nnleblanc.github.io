@@ -153,8 +153,8 @@ function updatePoints() {
         ),
       ) * 7.5 * ((x * 5) ** 2);
 
-      colors[3 * k] = red * intensity;
-      colors[3 * k + 1] = grn * intensity;
+      colors[3 * k] = red * intensity * Math.sin(alpha) * Math.sin(beta);
+      colors[3 * k + 1] = grn * intensity * Math.sin(beta) * Math.sin(beta);
       colors[3 * k + 2] = blu * intensity;
 
       k += 1;
