@@ -161,17 +161,17 @@ function updatePoints() {
 
       const redOffset = loc
         * hermitePolyOrderFive(alpha + Math.sin(alpha + .731 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + t))
+        * hermitePolyOrderFive(beta + Math.sin(beta + .5 * t))
         * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
 
       const grnOffset = loc
         * hermitePolyOrderFive(alpha + Math.sin(alpha + .531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta * t))
+        * hermitePolyOrderFive(beta + Math.sin(beta * .5 * t))
         * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1)
 
       const bluOffset = loc
         * hermitePolyOrderFive(alpha + Math.sin(alpha * .531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + t))
+        * hermitePolyOrderFive(beta + Math.sin(beta + .5 * t))
         * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
 
       const colorDamping = 10;
