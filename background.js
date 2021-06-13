@@ -176,9 +176,9 @@ function updatePoints() {
 
       const colorDamping = 20;
 
-      colors[3 * k] = Math.sin(red * fadeoff * redOffset * (1 / colorDamping);
+      colors[3 * k] = Math.sin(red * fadeoff * redOffset * (1 / colorDamping));
       colors[3 * k + 1] = Math.sin(grn * fadeoff * grnOffset * (1 / colorDamping));
-      colors[3 * k + 2] = Math.sin(blu * fadeoff * bluOffset * (1 / colorDamping);
+      colors[3 * k + 2] = Math.sin(blu * fadeoff * bluOffset * (1 / colorDamping));
 
       k += 1;
     }
