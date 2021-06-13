@@ -143,7 +143,7 @@ function updatePoints() {
         * hermitePolyOrderSix(alpha)
         * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
-        * Math.sin(alpha - 13 * t) * Math.sin(beta - 7 * t) * (1 / 4800);
+        * Math.sin(alpha - 5 * t) * Math.sin(beta - 3 * t) * (1 / 4800);
       positions[3 * k + 1] = yt;
 
       const intensity = Math.min(
