@@ -45,7 +45,7 @@ const hermitePolyOrderFive = (
         + 15 * x
 );
 
-const pointSize = 0.02;
+const pointSize = 0.01;
 
 // Generates geometry of initial point cloud
 function generatePointCloudGeometry(color, w, h) {
