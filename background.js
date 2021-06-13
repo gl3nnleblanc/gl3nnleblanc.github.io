@@ -174,9 +174,11 @@ function updatePoints() {
         * hermitePolyOrderFive(beta)
         * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
 
-      colors[3 * k] = Math.sin(red * fadeoff * redOffset);
-      colors[3 * k + 1] = Math.sin(grn * fadeoff * grnOffset);
-      colors[3 * k + 2] = Math.sin(blu * fadeoff * bluOffset);
+      const colorDamping = 20;
+
+      colors[3 * k] = Math.sin(red * fadeoff * redOffset * (1 / colorDamping);
+      colors[3 * k + 1] = Math.sin(grn * fadeoff * grnOffset * (1 / colorDamping));
+      colors[3 * k + 2] = Math.sin(blu * fadeoff * bluOffset * (1 / colorDamping);
 
       k += 1;
     }
