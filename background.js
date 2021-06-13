@@ -181,7 +181,7 @@ function render() {
 }
 
 function animate() {
-  THREE.requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
   render();
   stats.update();
 }
