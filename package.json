@@ -1,0 +1,23 @@
+{
+  "name": "gl3nnleblanc.github.io",
+  "version": "1.0.0",
+  "description": "Personal website hosted with Github pages",
+  "main": "background.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gl3nnleblanc/gl3nnleblanc.github.io.git"
+  },
+  "author": "G. S. LeBlanc",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/gl3nnleblanc/gl3nnleblanc.github.io/issues"
+  },
+  "homepage": "https://github.com/gl3nnleblanc/gl3nnleblanc.github.io#readme",
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb": "^18.2.1"
+  }
+}

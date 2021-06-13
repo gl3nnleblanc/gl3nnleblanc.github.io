@@ -2,9 +2,15 @@ import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/thr
 import Stats from 'https://mrdoob.github.io/stats.js/build/stats.module.js';
 
 // Global helper classes from three.js
-let renderer, scene, camera, raycaster, clock, stats;
+let renderer;
+let scene;
+let camera;
+let raycaster;
+let clock;
+let stats;
+
 // Global mouse pointer
-let pointer = new THREE.Vector2();
+const pointer = new THREE.Vector2();
 
 // Global timestamp
 let t;
