@@ -39,6 +39,12 @@ const hermitePolyOrderSix = (
         - 15
 );
 
+const hermitePolyOrderFive = (
+  (x) => x ** 5
+        - 10 * x ** 3
+        + 15 * x
+);
+
 const pointSize = 0.02;
 
 // Generates geometry of initial point cloud
@@ -139,25 +145,38 @@ function updatePoints() {
       const alpha = (x + x / 2 - (projX / 2)) * 20;
       const beta = (z + z / 2 - (projZ / 2)) * 20;
 
-      const y = Math.exp(-(alpha * alpha + beta * beta) / 2)
-        * hermitePolyOrderSix(alpha)
-        * hermitePolyOrderSix(beta);
+      const loc = Math.exp(-(alpha * alpha + beta * beta) / 2)
+
+      const y = loc * hermitePolyOrderSix(alpha) * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
         * Math.sin(alpha - 5 * t) * Math.sin(beta - 3 * t) * (1 / 4800);
       positions[3 * k + 1] = yt;
 
-      const intensity = Math.min(
+      const fadeoff = Math.min(
         1 / 20,
         Math.abs(
           y * Math.exp((-alpha * alpha + -beta * beta) / 0.2),
         ),
       ) * 7.5 * ((x * 5) ** 2);
 
-      const offset = (x) => Math.tanh(x + 1);
+      const redOffset = loc
+        * hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta);
+        * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
 
-      colors[3 * k] = red * intensity * offset(yt);
-      colors[3 * k + 1] = grn * intensity * offset(yt);
-      colors[3 * k + 2] = blu * intensity * offset(yt);
+      const grnOffset = loc
+        * hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta);
+        * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1)
+
+      const blueOffset = loc
+        * hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta);
+        * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
+
+      colors[3 * k] = red * fadeoff * redOffset;
+      colors[3 * k + 1] = grn * fadeoff * grnOffset;
+      colors[3 * k + 2] = blu * fadeoff * bluOffset;
 
       k += 1;
     }
