@@ -136,22 +136,22 @@ function updatePoints() {
       const x = (u - 0.5);
       const z = (v - 0.5);
 
-      const a = (x + x / 2 - (projX / 2)) * 20;
-      const b = (z + z / 2 - (projZ / 2)) * 20;
+      const alpha = (x + x / 2 - (projX / 2)) * 20;
+      const beta = (z + z / 2 - (projZ / 2)) * 20;
 
-      const y = Math.exp(-(a * a + b * b) / 2) * hermitePolyOrderSix(a) * hermitePolyOrderSix(b)
+      const y = Math.exp(-(alpha * alpha + beta * beta) / 2)
+        * hermitePolyOrderSix(alpha)
+        * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
-          * Math.sin(a - 13 * t) * Math.sin(b - 7 * t) / 4800;
+        * Math.sin(alpha - 13 * t) * Math.sin(beta - 7 * t) * (1 / 4800);
       positions[3 * k + 1] = yt;
 
       const intensity = Math.min(
-        1/20,
+        1 / 20,
         Math.abs(
-          y * Math.exp(
-            (-a*a + -b*b) / 0.2
-          )
-        )
-      ) * 7.5 * Math.pow(x * 5, 2);
+          y * Math.exp((-alpha * alpha + -beta * beta) / 0.2),
+        ),
+      ) * 7.5 * ((x * 5) ** 2);
 
       colors[3 * k] = red * intensity;
       colors[3 * k + 1] = grn * intensity;
@@ -168,9 +168,9 @@ function render() {
   raycaster.setFromCamera(pointer, camera);
   const intersections = raycaster.intersectObject(points);
   if (intersections.length > 0) {
-   const intersection = intersections[0];
-   projX = intersection.point.x;
-   projZ = intersection.point.z;
+    const intersection = intersections[0];
+    projX = intersection.point.x;
+    projZ = intersection.point.z;
   }
 
   t = clock.getElapsedTime();
@@ -181,7 +181,7 @@ function render() {
 }
 
 function animate() {
-  requestAnimationFrame(animate);
+  THREE.requestAnimationFrame(animate);
   render();
   stats.update();
 }
