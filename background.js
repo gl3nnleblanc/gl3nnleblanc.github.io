@@ -163,7 +163,7 @@ function updatePoints() {
       const fadeoff = Math.min(
         1 / 20,
         Math.abs(
-          y * Math.exp((-alpha * alpha + -beta * beta) / 0.05),
+          y * Math.exp((-alpha * alpha + -beta * beta) / 5),
         ),
       ) * 7.5 * ((x * 5) ** 2);
 
