@@ -98,6 +98,13 @@ function onPointerMove(event) {
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
+// Checks for window resize
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
 // Initialize helper classes
 function init() {
   const canvas = document.querySelector('#c');
@@ -115,6 +122,7 @@ function init() {
   camera.lookAt(scene.position);
   camera.updateMatrix();
 
+  window.addEventListener('resize', onWindowResize);
   document.addEventListener('pointermove', onPointerMove);
 
   points = generatePointCloud(new THREE.Color(r, g, b), width, height, t);
