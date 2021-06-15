@@ -125,7 +125,7 @@ function init() {
   window.addEventListener('resize', onWindowResize);
   document.addEventListener('pointermove', onPointerMove);
 
-  points = generatePointCloud(new THREE.Color(r, g, b), window.innerWidth, window.innerHeight, t);
+  points = generatePointCloud(new THREE.Color(r, g, b), width, height, t);
   points.scale.set(5, 10, 10);
   points.position.set(0, 0, 0);
   scene.add(points);
