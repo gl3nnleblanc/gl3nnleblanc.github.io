@@ -24,8 +24,8 @@ const b = 0;
 let points;
 
 // Global dimensions
-const width = window.innerWidth / 3;
-const height = window.innerHeight / 3;
+const width = window.innerWidth / 4;
+const height = window.innerHeight / 4;
 
 // Projecting mouse coordinates onto 3D plane
 let projX;
