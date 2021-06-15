@@ -60,8 +60,8 @@ function generatePointCloudGeometry(color, w, h) {
     for (let j = 0; j < height; j += 1) {
       const u = i / w;
       const v = j / h;
-      const x = (u - 0.5);
-      const z = (v - 0.5);
+      const x = (u - 0.5) * w;
+      const z = (v - 0.5) * w;
 
       const y = 0;
       positions[3 * k] = x;
