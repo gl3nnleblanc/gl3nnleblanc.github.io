@@ -102,7 +102,7 @@ function onPointerMove(event) {
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 // Initialize helper classes
@@ -150,8 +150,8 @@ function updatePoints() {
       const x = (u - 0.5);
       const z = (v - 0.5);
 
-      const alpha = (x + x / 2 - (projX / 2)) * 20;
-      const beta = (z + z / 2 - (projZ / 2)) * 20;
+      const alpha = (x + x / 2 - (projX / 2)) * 19;
+      const beta = (z + z / 2 - (projZ / 2)) * 19;
 
       const loc = Math.exp(-(alpha * alpha + beta * beta) / 2);
 
