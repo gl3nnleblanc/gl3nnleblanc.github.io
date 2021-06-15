@@ -65,7 +65,7 @@ canvas {
 }
 
 a:link {
-  color:#fafafa;
+  color:#1b1b1b;
 }
 
 #overview {
@@ -100,6 +100,15 @@ h1 {
   filter:invert(1.0);
 }
 
+#bounding-box {
+  margin: auto;
+  background: #fafafa;
+  padding: 100px;
+  width: 50%;
+  color: #1b1b1b;
+}
+
+
 hr {
   color:#fafafa;
 }
@@ -130,11 +139,11 @@ a:hover {
 }
 
 a:visited {
-  color:#fafafa;
+  color:#2b2b2b;
 }
 
 ul {
   font-family:Helvetica;
   font-size:14pt;
-  margin:40px;
+  margin:auto;
 }
