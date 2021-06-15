@@ -145,7 +145,7 @@ function updatePoints() {
       const alpha = (x + x / 2 - (projX / 2)) * 20;
       const beta = (z + z / 2 - (projZ / 2)) * 20;
 
-      const loc = Math.exp(-(alpha * alpha + beta * beta) / 2)
+      const loc = Math.exp(-(alpha * alpha + beta * beta) / 2);
 
       const y = loc * hermitePolyOrderSix(alpha) * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
@@ -160,19 +160,19 @@ function updatePoints() {
       ) * 7.5 * ((x * 5) ** 2);
 
       const redOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha + .731 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + .5 * t))
-        * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
+        * hermitePolyOrderFive(alpha + Math.sin(alpha + 0.731 * t))
+        * hermitePolyOrderFive(beta + Math.sin(beta + 0.5 * t))
+        * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t);
 
       const grnOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha + .531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta * .5 * t))
-        * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1)
+        * hermitePolyOrderFive(alpha + Math.sin(alpha + 0.531 * t))
+        * hermitePolyOrderFive(beta + Math.sin(beta * 0.5 * t))
+        * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1);
 
       const bluOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha * .531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + .5 * t))
-        * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1)
+        * hermitePolyOrderFive(alpha + Math.sin(alpha * 0.531 * t))
+        * hermitePolyOrderFive(beta + Math.sin(beta + 0.5 * t))
+        * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1);
 
       const colorDamping = 10;
 
