@@ -153,7 +153,7 @@ function updatePoints() {
       const alpha = (x + x / 2 - (projX / 2)) * 19;
       const beta = (z + z / 2 - (projZ / 2)) * 19;
 
-      const loc = Math.exp(-(alpha * alpha + beta * beta) / 2);
+      const loc = Math.exp(-(alpha * alpha + beta * beta) / 3);
 
       const y = loc * hermitePolyOrderSix(alpha) * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
