@@ -21,6 +21,12 @@ canvas {
   z-index: -9999;
 }
 
+#c {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 #menuBar {
   font-family:Helvetica;
   list-style-type: none;
