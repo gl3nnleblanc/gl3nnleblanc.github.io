@@ -150,14 +150,14 @@ function updatePoints() {
       const x = (u - 0.5);
       const z = (v - 0.5);
 
-      const alpha = (x + x / 2 - (projX / 2)) * 19;
-      const beta = (z + z / 2 - (projZ / 2)) * 19;
+      const alpha = (x - (projX / 3.1)) * 10;
+      const beta = (z - (projZ / 3.1)) * 10;
 
       const loc = Math.exp(-(alpha * alpha + beta * beta) / 3);
 
       const y = loc * hermitePolyOrderSix(alpha) * hermitePolyOrderSix(beta);
       const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
-        * Math.sin(alpha - 5 * t) * Math.sin(beta - 3 * t) * (1 / 22000);
+        * (1 / 22000);
       positions[3 * k + 1] = yt;
 
       const fadeoff = Math.min(
