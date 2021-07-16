@@ -6,14 +6,14 @@ let renderer;
 let scene;
 let camera;
 let raycaster;
-let clock;
 let stats;
 
 // Global mouse pointer
 const pointer = new THREE.Vector2();
 
-// Global timestamp
+// Global timestamps
 let t;
+let tClick;
 
 // Global colors
 const r = 0;
@@ -24,8 +24,8 @@ const b = 0;
 let points;
 
 // Global dimensions
-const width = window.innerWidth / 5;
-const height = window.innerHeight / 5;
+const width = 250;
+const height = 250;
 
 // Projecting mouse coordinates onto 3D plane
 let projX;
@@ -98,6 +98,11 @@ function onPointerMove(event) {
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
+// Checks for mouse click
+function onPointerClick() {
+  tClick = 0;
+}
+
 // Checks for window resize
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -110,7 +115,8 @@ function init() {
   const canvas = document.querySelector('#c');
 
   scene = new THREE.Scene();
-  clock = new THREE.Clock();
+  t = 0;
+  tClick = 20;
   stats = new Stats();
   canvas.appendChild(stats.dom);
 
@@ -124,6 +130,7 @@ function init() {
 
   window.addEventListener('resize', onWindowResize);
   document.addEventListener('pointermove', onPointerMove);
+  document.addEventListener('click', onPointerClick);
 
   points = generatePointCloud(new THREE.Color(r, g, b), width, height, t);
   points.scale.set(5, 10, 10);
@@ -135,60 +142,35 @@ function init() {
 
 // Updates points
 function updatePoints() {
-  const positions = points.geometry.attributes.position.array;
   const colors = points.geometry.attributes.color.array;
-
-  const red = Math.sin(2 * Math.PI * (t / 7)) / 2 + 1 / 2;
-  const grn = Math.sin(2 * Math.PI * ((t + 3) / 7)) / 2 + 1 / 2;
-  const blu = Math.sin(2 * Math.PI * ((t + 5) / 7)) / 2 + 1 / 2;
-
-  let k = 0;
+  let n = 0;
   for (let i = 0; i < width; i += 1) {
     for (let j = 0; j < height; j += 1) {
-      const u = i / width;
-      const v = j / height;
-      const x = (u - 0.5);
-      const z = (v - 0.5);
+      const x = ((i / width) - 0.5);
+      const z = ((j / height) - 0.5);
 
-      const alpha = (x - (projX / 3.1)) * 10;
-      const beta = (z - (projZ / 3.1)) * 10;
+      const alpha = (x - (projX / 100)) * 10;
+      const beta = (z - (projZ / 100)) * 10 * (16 / 9);
 
-      const loc = Math.exp(-(alpha * alpha + beta * beta) / 3);
+      const radius = Math.sqrt(alpha ** 2 + beta ** 2);
 
-      const y = loc * hermitePolyOrderSix(alpha) * hermitePolyOrderSix(beta);
-      const yt = y * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t)
-        * (1 / 22000);
-      positions[3 * k + 1] = yt;
+      const click = Math.exp(-(alpha * alpha + beta * beta) / 5) * Math.sin(1 / (tClick + 0.318))
+        * hermitePolyOrderFive(radius);
 
-      const fadeoff = Math.min(
-        1 / 20,
-        Math.abs(
-          y * Math.exp((-alpha * alpha + -beta * beta) / 5),
-        ),
-      ) * 7.5 * ((x * 5) ** 2);
+      const red = Math.sin(hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta) + t);
 
-      const redOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha + 0.731 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + 0.5 * t))
-        * Math.sin(x - 1.5 * t) * Math.sin(z - 1.5 * t);
+      const grn = Math.sin(hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta) + 0.4 * t + 3);
 
-      const grnOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha + 0.531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta * 0.5 * t))
-        * Math.sin(x - 1.1 * t) * Math.sin(z - 1.3 * t + 1);
+      const blu = Math.sin(hermitePolyOrderSix(beta)
+        * hermitePolyOrderSix(alpha) + t + 5);
 
-      const bluOffset = loc
-        * hermitePolyOrderFive(alpha + Math.sin(alpha * 0.531 * t))
-        * hermitePolyOrderFive(beta + Math.sin(beta + 0.5 * t))
-        * Math.sin(x - 1.2 * t) * Math.sin(z - 1.2 * t + 1);
+      colors[3 * n] = red * click;
+      colors[3 * n + 1] = grn * click;
+      colors[3 * n + 2] = blu * click;
 
-      const colorDamping = 10;
-
-      colors[3 * k] = Math.sin(red * fadeoff * redOffset * (1 / colorDamping));
-      colors[3 * k + 1] = Math.sin(grn * fadeoff * grnOffset * (1 / colorDamping));
-      colors[3 * k + 2] = Math.sin(blu * fadeoff * bluOffset * (1 / colorDamping));
-
-      k += 1;
+      n += 1;
     }
   }
 }
@@ -204,8 +186,9 @@ function render() {
     projZ = intersection.point.z;
   }
 
-  t = clock.getElapsedTime();
-  updatePoints();
+  updatePoints(t);
+  tClick += 0.1;
+  t += 0.1;
   points.geometry.attributes.position.needsUpdate = true;
   points.geometry.attributes.color.needsUpdate = true;
   renderer.render(scene, camera);
