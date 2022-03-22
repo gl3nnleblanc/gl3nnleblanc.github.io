@@ -149,13 +149,13 @@ function updatePoints() {
       const x = ((i / width) - 0.5);
       const z = ((j / height) - 0.5);
 
-      const alpha = (x - (projX / 100)) * 10;
-      const beta = (z - (projZ / 100)) * 10 * (16 / 9);
+      const alpha = (x - (projX / 2)) * 10;
+      const beta = (z - (projZ / 2)) * 10 * (16 / 9);
 
-      const radius = Math.sqrt(alpha ** 2 + beta ** 2);
+      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 10;
 
       const click = Math.exp(-(alpha * alpha + beta * beta) / 5) * Math.sin(1 / (tClick + 0.318))
-        * hermitePolyOrderFive(radius);
+        * hermitePolyOrderFive(radius) * 10;
 
       const red = Math.sin(hermitePolyOrderFive(alpha)
         * hermitePolyOrderFive(beta) + t);
