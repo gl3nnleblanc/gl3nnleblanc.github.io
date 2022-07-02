@@ -45,7 +45,7 @@ const hermitePolyOrderFive = (
         + 15 * x
 );
 
-const pointSize = 0.04;
+const pointSize = 0.02;
 
 // Generates geometry of initial point cloud
 function generatePointCloudGeometry(color, w, h) {
@@ -133,8 +133,7 @@ function init() {
   document.addEventListener('click', onPointerClick);
 
   points = generatePointCloud(new THREE.Color(r, g, b), width, height, t);
-  points.scale.set(8, 10, 8);
-
+  points.scale.set(5, 5, 5);
   points.position.set(0, 0, 0);
   scene.add(points);
 
@@ -150,8 +149,8 @@ function updatePoints() {
       const x = ((i / width) - 0.5);
       const z = ((j / height) - 0.5);
 
-      const alpha = (x - projX) * 10
-      const beta = (z - projZ + .4) * 10
+      const alpha = (x - (projX / 5)) * 10;
+      const beta = (z - (projZ / 5)) * 10;
 
       const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 100;
 
