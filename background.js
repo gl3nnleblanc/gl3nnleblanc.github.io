@@ -100,7 +100,7 @@ function onPointerMove(event) {
 
 // Checks for mouse click
 function onPointerClick() {
-  tClick = 10;
+  tClick = 0;
 }
 
 // Checks for window resize
@@ -152,9 +152,10 @@ function updatePoints() {
       const alpha = (x - (projX / 5)) * 10;
       const beta = (z - (projZ / 5)) * 10;
 
-      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 100;
+      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 10;
 
-      const click = Math.sin(1 / (tClick + 0.318)) * 10;
+      const click = Math.exp(-(alpha * alpha + beta * beta) / 5) * Math.sin(1 / (tClick + 0.318))
+        * hermitePolyOrderFive(radius) * 10;
 
       const red = Math.sin(hermitePolyOrderFive(alpha)
         * hermitePolyOrderFive(beta) + t);
@@ -181,8 +182,8 @@ function render() {
   const intersections = raycaster.intersectObject(points);
   if (intersections.length > 0) {
     const intersection = intersections[0];
-    projX = intersection.point.x / 5.5;
-    projZ = intersection.point.z / 5.5;
+    projX = intersection.point.x;
+    projZ = intersection.point.z;
   }
 
   updatePoints(t);
