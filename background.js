@@ -14,6 +14,7 @@ const pointer = new THREE.Vector2();
 // Global timestamps
 let t;
 let tClick;
+const tClickInit = 10;
 
 // Global colors
 const r = 0;
@@ -96,11 +97,14 @@ function generatePointCloud(color, w, h, time) {
 function onPointerMove(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  if (tClick > tClickInit) {
+    tClick -= 1;
+  }
 }
 
 // Checks for mouse click
 function onPointerClick() {
-  tClick = 0;
+  tClick = tClickInit;
 }
 
 // Checks for window resize
@@ -116,14 +120,14 @@ function init() {
 
   scene = new THREE.Scene();
   t = 0;
-  tClick = 20;
+  tClick = tClickInit;
   stats = new Stats();
   canvas.appendChild(stats.dom);
 
   renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4);
   camera.position.set(0, 2.5, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
@@ -149,8 +153,8 @@ function updatePoints() {
       const x = ((i / width) - 0.5);
       const z = ((j / height) - 0.5);
 
-      const alpha = (x - (projX / 5)) * 10;
-      const beta = (z - (projZ / 5)) * 10;
+      const alpha = (x - (projX / 4.2)) * 10;
+      const beta = (z - (projZ / 4.2)) * 10;
 
       const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 10;
 
@@ -187,7 +191,7 @@ function render() {
   }
 
   updatePoints(t);
-  tClick += 0.1;
+  tClick += 0.2;
   t += 0.1;
   points.geometry.attributes.position.needsUpdate = true;
   points.geometry.attributes.color.needsUpdate = true;
