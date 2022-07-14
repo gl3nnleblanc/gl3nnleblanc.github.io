@@ -14,6 +14,7 @@ const pointer = new THREE.Vector2();
 // Global timestamps
 let t;
 let tClick;
+const tClickInit = 10;
 
 // Global colors
 const r = 0;
@@ -45,7 +46,7 @@ const hermitePolyOrderFive = (
         + 15 * x
 );
 
-const pointSize = 0.04;
+const pointSize = 0.02;
 
 // Generates geometry of initial point cloud
 function generatePointCloudGeometry(color, w, h) {
@@ -96,11 +97,14 @@ function generatePointCloud(color, w, h, time) {
 function onPointerMove(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  if (tClick > tClickInit) {
+    tClick -= 1;
+  }
 }
 
 // Checks for mouse click
 function onPointerClick() {
-  tClick = 10;
+  tClick = tClickInit;
 }
 
 // Checks for window resize
@@ -116,14 +120,14 @@ function init() {
 
   scene = new THREE.Scene();
   t = 0;
-  tClick = 20;
+  tClick = tClickInit;
   stats = new Stats();
   canvas.appendChild(stats.dom);
 
   renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4);
   camera.position.set(0, 2.5, 0);
   camera.lookAt(scene.position);
   camera.updateMatrix();
@@ -133,8 +137,7 @@ function init() {
   document.addEventListener('click', onPointerClick);
 
   points = generatePointCloud(new THREE.Color(r, g, b), width, height, t);
-  points.scale.set(8, 10, 8);
-
+  points.scale.set(5, 5, 5);
   points.position.set(0, 0, 0);
   scene.add(points);
 
@@ -150,12 +153,13 @@ function updatePoints() {
       const x = ((i / width) - 0.5);
       const z = ((j / height) - 0.5);
 
-      const alpha = (x - projX) * 10
-      const beta = (z - projZ + .4) * 10
+      const alpha = (x - (projX / 4.2)) * 10;
+      const beta = (z - (projZ / 4.2)) * 10;
 
-      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 100;
+      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 10;
 
-      const click = Math.sin(1 / (tClick + 0.318)) * 10;
+      const click = Math.exp(-(alpha * alpha + beta * beta) / 5) * Math.sin(1 / (tClick + 0.318))
+        * hermitePolyOrderFive(radius) * 10;
 
       const red = Math.sin(hermitePolyOrderFive(alpha)
         * hermitePolyOrderFive(beta) + t);
@@ -182,12 +186,12 @@ function render() {
   const intersections = raycaster.intersectObject(points);
   if (intersections.length > 0) {
     const intersection = intersections[0];
-    projX = intersection.point.x / 5.5;
-    projZ = intersection.point.z / 5.5;
+    projX = intersection.point.x;
+    projZ = intersection.point.z;
   }
 
   updatePoints(t);
-  tClick += 0.1;
+  tClick += 0.2;
   t += 0.1;
   points.geometry.attributes.position.needsUpdate = true;
   points.geometry.attributes.color.needsUpdate = true;
