@@ -7,25 +7,30 @@
   color: #fcfafe;
   background-color: #fc5a9e;
 }
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-.flex {
-  display: flex;
-  justify-content: center;
-}
-
-.flex-item + .flex-item {
-  margin-left: 10px;
+.yay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width if desired */
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: justify; /* This property justifies the text */
+  background-color: #f0f0f0; /* Optional: Set a background color */
+  z-index: 9999;
+  color: #ffffff;
 }
 </style>
 <html>
 <div class="doc">
   <body>
     <h1>🥳🥹</h1>
-    <div class="yay"></div>
+    <div class="yay">
+      <p><div id="yay"></div></p>
+    </div>
   </body>
 </div>
+<div id="imageContainer"></div>
+<script src="yes.js"></script>
 </html>

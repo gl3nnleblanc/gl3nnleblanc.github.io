@@ -1,5 +1,48 @@
 let noCount = 0;
 let yesString = "YAAAAAYYY";
+function getRandomImage() {
+  const imageDirectory = 'static-content/acceptance/';
+  const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', /* add more image filenames */];
+  const randomImage = images[Math.floor(Math.random() * images.length)];
+  return imageDirectory + randomImage;
+}
+
+function getRandomPosition() {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const x = Math.floor(Math.random() * screenWidth);
+  const y = Math.floor(Math.random() * screenHeight);
+  return { x, y };
+}
+
+function getRandomScaling() {
+  return Math.floor(Math.random() * 76) + 25; // Random scaling between 25% and 100%
+}
+
+function displayRandomImage() {
+  const image = new Image();
+  const randomPosition = getRandomPosition();
+  const randomScaling = getRandomScaling();
+
+  image.src = getRandomImage();
+  image.style.width = randomScaling + '%';
+  image.style.position = 'absolute';
+  image.style.left = randomPosition.x + 'px';
+  image.style.top = randomPosition.y + 'px';
+
+  document.body.appendChild(image);
+
+  // Remove the image after a timeout (adjust the timeout value as needed)
+  setTimeout(() => {
+    displayRandomImage(); // Call recursively for infinite loop
+  }, 200); // Change 5000 to the desired display duration in milliseconds
+}
+
+function beExcited() {
+  yesString += 'Y';
+  document.getElementById('yay').innerTest = yesString;
+}
+
 
 const responsesForNo = [
   "Haha. Nice joke. Why don't you try again?",
@@ -68,12 +111,13 @@ function showForeverAlone() {
 
 function beExcited() {
   yesString += 'Y';
-  document.getElementById('yay').innerText = yesString;
+  document.getElementById("yay").innerText = yesString;
 }
 
 function doYes() {
   setInnerHTMLFromFile('yes.html');
-  setInterval(beExcited, 200);
+  setInterval(beExcited, 2);
+  displayRandomImage();
 }
 
 function doNo() {
