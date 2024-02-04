@@ -1,4 +1,5 @@
 let noCount = 0;
+let yesString = "YAAAAAYYY";
 
 const responsesForNo = [
   "Haha. Nice joke. Why don't you try again?",
@@ -65,8 +66,14 @@ function showForeverAlone() {
   document.body.appendChild(img);
 }
 
+function beExcited() {
+  yesString += 'Y';
+  document.getElementById('yay').innerText = yesString;
+}
+
 function doYes() {
   setInnerHTMLFromFile('yes.html');
+  setInterval(beExcited, 200);
 }
 
 function doNo() {
