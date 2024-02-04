@@ -2,7 +2,20 @@ let noCount = 0;
 let yesString = "YAAAAAYYY";
 function getRandomImage() {
   const imageDirectory = 'static-content/acceptance/';
-  const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', /* add more image filenames */];
+  const images = ['1.jpg',
+    '2.jpg',
+    '3.jpg',
+    '4.jpg',
+    '5.jpg',
+    '6.jpg',
+    '7.jpg',
+    '8.png',
+    '9.jpg',
+    '10.jpg',
+    '11.gif',
+    '12.gif',
+    '13.jpg'
+  ];
   const randomImage = images[Math.floor(Math.random() * images.length)];
   return imageDirectory + randomImage;
 }
