@@ -28,14 +28,17 @@ function getRandomPosition() {
   return { x, y };
 }
 
-function getRandomScaling() {
-  return Math.floor(Math.random() * 76) + 25; // Random scaling between 25% and 100%
+function getRandomScaling(mean, stdDev) {
+  let u1 = Math.random();
+  let u2 = Math.random();
+  let z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  return z0 * stdDev + mean;
 }
 
 function displayRandomImage() {
   const image = new Image();
   const randomPosition = getRandomPosition();
-  const randomScaling = getRandomScaling();
+  const randomScaling = getRandomScaling(25,20);
 
   image.src = getRandomImage();
   image.style.width = randomScaling + '%';
