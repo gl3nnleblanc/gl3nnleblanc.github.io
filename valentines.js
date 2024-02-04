@@ -9,12 +9,21 @@ function getRandomImage() {
     '5.jpg',
     '6.jpg',
     '7.jpg',
-    '8.png',
-    '9.jpg',
+    '8.jpg',
+    '9.gif',
     '10.jpg',
     '11.gif',
     '12.gif',
-    '13.jpg'
+    '13.jpg',
+    '13.gif',
+    '14.gif',
+    '15.gif',
+    '16.gif',
+    '17.gif',
+    '18.gif',
+    '19.gif',
+    '20.gif',
+    '21.gif'
   ];
   const randomImage = images[Math.floor(Math.random() * images.length)];
   return imageDirectory + randomImage;
