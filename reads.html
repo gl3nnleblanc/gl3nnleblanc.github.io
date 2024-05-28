@@ -1,0 +1,90 @@
+<!doctype=html>
+<html lang="en">
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="style.css">
+
+<!-- Head menu bar -->
+<nav>
+  <ul id="menuBar">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="reads.html">Reads</a></li>
+    <li><a href="links.html">Links</a></li>
+    <li><a href="quotes.html">Quotes</a></li>
+  </ul>
+</nav>
+<script type="module" src="background.js"></script>
+<script src="scrollbar.js"></script>
+<canvas id="c"></canvas>
+
+<br>
+<div id="bounding-box">
+  <h2 id="blog"> Good Reads </h2>
+  <hr width=80%>
+    <table>
+      <tr>
+        <th>Date Added</th>
+        <th>Link</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>May 27, 2024</td>
+        <td><a href="https://lamport.azurewebsites.net/pubs/paxos-simple.pdf">Paxos made simple</a></td>
+        <td>One of the canonical approaches for achieving fault-tolerance in a distributed system. Leslie Lamport originally presented this by describing the mythical Greek island of "Paxos," complete with fake Greek names transliterated from those of computer scientists of the times. Supposedly his original talks were <a href="http://lamport.azurewebsites.net/pubs/pubs.html?type=path#lamport-paxos">"in the persona of an Indiana-Jones-style archaeologist, replete with Stetson hat and hip flask"</a>.  
+      </tr>
+      <tr>
+        <td>August 28, 2023</td>
+        <td><a href="https://arxiv.org/ftp/arxiv/papers/1603/1603.09320.pdf">Efficient and robust approximate nearest
+neighbor search using Hierarchical Navigable
+Small World graphs</a></td>
+        <td>HNSW is a neat way to do approximate k-nearest neighbor search in a vector database. This paper is a good read and the underlying concept is surprisingly straightforward.
+      </tr>
+      <tr>
+        <td>July 24, 2023</td>
+        <td><a href="https://www.comp.nus.edu.sg/~gilbert/pubs/BrewersConjecture-SigAct.pdf">Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services</a></td>
+	<td>Brewer (go bears!) originally posed the CAP theorem as a conjecture. The theorem essentially states you can only have two out of the three between consistency, availability, and partition tolerance when building a distributed system. This is the paper that first proved it, and is a quick read that (I think) provides some good insight into its core meaning.
+      </tr>
+      <tr>
+        <td>January 21, 2023</td>
+        <td><a href="https://arxiv.org/pdf/2206.13102.pdf">HKJKD: Modeling Content Creator Incentives on Algorithm-Curated Platforms</a></td>
+	<td>The attention economy has far-reaching effects on our daily lives. Digital platforms connect content creators with end users in a virtual marketplace wherein creators compete over the attention pool. How can a platform's particular choice of recommendation algorithm(s) affect which content is produced and consumed?
+      </tr>
+      <tr>
+        <td>October 10, 2022</td>
+        <td><a href="http://lamport.azurewebsites.net/pubs/pubs.html#time-clocks">Leslie Lamport: Time, Clocks, and the Ordering of Events in a Distributed System</a></td>
+	<td>One of those rare papers that is simultaneously extremely easy to read and extremely foundational, this paper lays the foundations for creating a useful distributed system. Lamport's background in special relativity allowed him to clearly see where prior work on this subject had gotten it wrong. I highly recommend <a href="https://www.youtube.com/watch?v=rkZzg7Vowao">the Quanta video</a> on Lamport's background.</td>
+      </tr>
+      <tr>
+        <td>July 3, 2022</td>
+        <td><a href="https://fafnir.phyast.pitt.edu/py3765/BetheLambShift.pdf">H. A. Bethe: The Electromagnetic Shift of Energy Levels</a></td>
+        <td>In the words of my grandfather Oliver: <i>This is one of the best physics articles of all time! It is the mother of renormalization! I rate it right up there with young Newton's "light is...composed of difform rays" <a href="https://www.newtonproject.ox.ac.uk/view/texts/normalized/NATP00006">optics paper</a> & Einstein's special relativity paper (1904)!!</i></td>
+      </tr>
+      <tr>
+        <td>May 5, 2022</td>
+        <td><a href="https://arxiv.org/pdf/2004.05631.pdf">Tai-Danae Bradley: At the Interface of Algebra and Statistics</a></td>
+        <td>Oh man, this thesis is super cool. I remember reading <a href="https://www.math3ma.com/blog/matrices-as-tensor-network-diagrams">Dr. Bradley's blog</a> way back in 2019 when first getting acquainted with the work I did at NASA involving tensor networks, which was invaluable during early-on-boarding-- she has quite a knack for succinctly explaining complex ideas, and this thesis is no exception. If you have any interest in category theory, quantum mechanics, or NLP, I highly recommend giving this a skim!</td>
+      </tr>
+      <tr>
+        <td>March 22, 2022</td>
+        <td><a href="http://wexler.free.fr/library/files/kirkpatrick%20%281983%29%20optimization%20by%20simulated%20annealing.pdf">S. Kirkpatrick: Optimization by Simulated Annealing</a></td>
+        <td>A classic paper on the simulated annealing approach to approximating NP-complete problems. When I took <a href="https://cs170.org">CS170</a> a team using simulated annealing won the final project (a competition to create and solve instances of an NP-hard problem) by a long margin.</td>
+      </tr>
+      <tr>
+        <td>October 26, 2021</td>
+        <td><a href="https://santafe.app.box.com/s/64tasmxpsrhdq5dwjyromtrk4c9lmsv4?utm_medium=Squarespace&utm_source=Direct">Agent-based Modeling in Archaeology</a></td>
+        <td>The Santa Fe Institute has really interested me for a while now. They do a lot of cool work at the interface of STEM and the humanities, under the umbrella discipline of "Complexity Theory." A <i>complex adaptive system</i> is a dynamic network of interactions whose behavior as an ensemble is not predictable according to the behavior of its components. This field is a pretty slick mashup of super neat work including concepts from physics like phase transitions, spin glasses, and nonlinear dynamics, applied to open questions in previously separate areas like economics, neuroscience, and psychology.</td>
+      </tr>
+      <tr>
+        <td>September 22, 2021</td>
+        <td><a href="https://www.youtube.com/watch?v=gFEE3w7F0ww">Lex Fridman interview with Travis Oliphant</a></td>
+        <td>Okay, this isn't a read, but nonetheless it's a really great interview to learn about the historical development of NumPy and SciPy, with a bunch of other cool stuff thrown in.</td>
+      </tr>
+      <tr>
+        <td>July 19, 2021</td>
+        <td><a href="https://lab6.com/0">Deurbanising the Web</a></td>
+        <td>Great essay about the garbage pileup that is the modern web. A convincing plea to return to simple and dumb websites.</td>
+      </tr>
+    </table>
+  <br>
+</div>
+
+</html>
