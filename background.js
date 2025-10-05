@@ -24,17 +24,9 @@ const b = 0;
 // Global pointcloud
 let points;
 
-// Global dimensions and simulation parameters
+// Global dimensions
 const width = 250;
 const height = 250;
-const dampingFactor = 0.99; // Controls how quickly ripples fade
-const propagationSpeed = 0.2; // Controls ripple speed
-const mouseForce = 2.0; // Strength of mouse interaction
-
-// Buffers for wave simulation
-let currentBuffer;
-let previousBuffer;
-let velocityBuffer;
 
 // Projecting mouse coordinates onto 3D plane
 let projX;
@@ -55,45 +47,6 @@ const hermitePolyOrderFive = (
 );
 
 const pointSize = 0.02;
-
-// Initialize wave simulation buffers
-function initializeBuffers() {
-  currentBuffer = new Float32Array(width * height);
-  previousBuffer = new Float32Array(width * height);
-  velocityBuffer = new Float32Array(width * height);
-}
-
-// Update wave simulation
-function updateWaveSimulation() {
-  const dt = 1.0;
-  const dx = 1.0;
-  const c = propagationSpeed;
-  const dampingTerm = dampingFactor;
-  
-  for (let i = 1; i < width - 1; i++) {
-    for (let j = 1; j < height - 1; j++) {
-      const idx = i + j * width;
-      
-      // 2D Wave equation discretization
-      const laplacian = (
-        previousBuffer[idx - 1] + 
-        previousBuffer[idx + 1] + 
-        previousBuffer[idx - width] + 
-        previousBuffer[idx + width] - 
-        4 * previousBuffer[idx]
-      ) / (dx * dx);
-      
-      // Update velocity using wave equation
-      velocityBuffer[idx] = velocityBuffer[idx] * dampingTerm + c * c * laplacian * dt;
-      
-      // Update position
-      currentBuffer[idx] = previousBuffer[idx] + velocityBuffer[idx] * dt;
-    }
-  }
-  
-  // Swap buffers
-  [previousBuffer, currentBuffer] = [currentBuffer, previousBuffer];
-}
 
 // Generates geometry of initial point cloud
 function generatePointCloudGeometry(color, w, h) {
@@ -140,63 +93,12 @@ function generatePointCloud(color, w, h, time) {
   return new THREE.Points(geometry, material);
 }
 
-// Modified updatePoints function
-function updatePoints() {
-  const colors = points.geometry.attributes.color.array;
-  let n = 0;
-  
-  updateWaveSimulation();
-  
-  for (let i = 0; i < width; i += 1) {
-    for (let j = 0; j < height; j += 1) {
-      const x = ((i / width) - 0.5);
-      const z = ((j / height) - 0.5);
-      const idx = i + j * width;
-
-      const waveHeight = currentBuffer[idx];
-      
-      // Calculate base intensity using Hermite polynomial
-      const radius = Math.sqrt(x * x + z * z);
-      const baseIntensity = Math.abs(hermitePolyOrderSix(radius * 2)) * 0.1;
-      
-      // Only show colors where there's wave activity
-      const waveIntensity = Math.abs(waveHeight);
-      if (waveIntensity < 0.001) {
-        colors[3 * n] = 0;
-        colors[3 * n + 1] = 0;
-        colors[3 * n + 2] = 0;
-      } else {
-        // Dynamic rainbow colors based on wave properties
-        const intensity = waveIntensity + baseIntensity;
-        // Use wave height and velocity to create dynamic phase shifts
-        const basePhase = Math.atan2(velocityBuffer[idx], waveHeight) + radius * 5;
-        
-        colors[3 * n] = Math.abs(Math.sin(basePhase)) * intensity;
-        colors[3 * n + 1] = Math.abs(Math.sin(basePhase + 2.094)) * intensity;
-        colors[3 * n + 2] = Math.abs(Math.sin(basePhase + 4.189)) * intensity;
-      }
-
-      n += 1;
-    }
-  }
-}
-
-// Modified onPointerMove
+// Checks for mouse movement
 function onPointerMove(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  
-  // Add energy to wave simulation at mouse position
-  const intersections = raycaster.intersectObject(points);
-  if (intersections.length > 0) {
-    const intersection = intersections[0];
-    const x = Math.floor((intersection.point.x / 5 + 0.5) * width);
-    const z = Math.floor((intersection.point.z / 5 + 0.5) * height);
-    
-    if (x >= 0 && x < width && z >= 0 && z < height) {
-      const idx = x + z * width;
-      velocityBuffer[idx] += mouseForce;
-    }
+  if (tClick > tClickInit) {
+    tClick -= 1;
   }
 }
 
@@ -212,7 +114,7 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// Modified init function
+// Initialize helper classes
 function init() {
   const canvas = document.querySelector('#c');
 
@@ -240,8 +142,41 @@ function init() {
   scene.add(points);
 
   raycaster = new THREE.Raycaster();
+}
 
-  initializeBuffers();
+// Updates points
+function updatePoints() {
+  const colors = points.geometry.attributes.color.array;
+  let n = 0;
+  for (let i = 0; i < width; i += 1) {
+    for (let j = 0; j < height; j += 1) {
+      const x = ((i / width) - 0.5);
+      const z = ((j / height) - 0.5);
+
+      const alpha = (x - (projX / 4.2)) * 10;
+      const beta = (z - (projZ / 4.2)) * 10;
+
+      const radius = Math.sqrt(alpha ** 2 + beta ** 2) / 10;
+
+      const click = Math.exp(-(alpha * alpha + beta * beta) / 5) * Math.sin(1 / (tClick + 0.318))
+        * hermitePolyOrderFive(radius) * 10;
+
+      const red = Math.sin(hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta) + t);
+
+      const grn = Math.sin(hermitePolyOrderFive(alpha)
+        * hermitePolyOrderFive(beta) + 0.4 * t + 3);
+
+      const blu = Math.sin(hermitePolyOrderSix(beta)
+        * hermitePolyOrderSix(alpha) + t + 5);
+
+      colors[3 * n] = red * click;
+      colors[3 * n + 1] = grn * click;
+      colors[3 * n + 2] = blu * click;
+
+      n += 1;
+    }
+  }
 }
 
 function render() {
